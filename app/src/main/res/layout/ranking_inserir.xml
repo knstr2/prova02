@@ -5,49 +5,49 @@
     android:paddingRight="10dp">
 
     <TextView
+        android:id="@+id/tvTituloGanhador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Parabéns, por favor, insira seu nome:"
-        android:id="@+id/tvTituloGanhador"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="100dp"
+        android:text="Parabéns, por favor, insira seu nome:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
+        android:id="@+id/etInserirRanking"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etInserirRanking"
         android:layout_below="@+id/tvTituloGanhador"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp" />
 
     <Button
+        android:id="@+id/btConfirma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirma"
-        android:id="@+id/btConfirma"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="50dp"
+        android:text="Confirma" />
 
     <TextView
+        android:id="@+id/tvScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="SCORE:"
-        android:id="@+id/tvScore"
         android:layout_alignParentTop="true"
+        android:text="SCORE:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="40dp" />
 
     <TextView
+        android:id="@+id/tvPontos"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/tvPontos"
-        android:textSize="40dp"
         android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/tvScore"
         android:layout_toRightOf="@+id/tvScore"
-        android:layout_toEndOf="@+id/tvScore" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40dp" />
 </RelativeLayout>

@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.sql.SQLException;
 import java.util.Random;
 
 /**
@@ -20,21 +21,21 @@ import java.util.Random;
  */
 public class Play extends AppCompatActivity {
 
+    static final int NIVEL_FACIL = 7; //8 - 14 - 20 - 31
     static boolean BOTAO_VERDE = false;
     static boolean BOTAO_VERMELHO = false;
     static boolean BOTAO_AMARELO = false;
     static boolean BOTAO_AZUL = false;
     static boolean INICIO = false;
-    static final int NIVEL_FACIL = 7; //8 - 14 - 20 - 31
-
+    int[] sequencia;
+    private GeniusDAO geniusDAO;
     private Button btVerde, btVermelho, btAmarelo, btAzul, btIniciar;
-    int[] sequencia = new int[NIVEL_FACIL];
     private int etapa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.play);
 
         btVerde = (Button)findViewById(R.id.btVerde);
         btVermelho = (Button)findViewById(R.id.btVermelho);
@@ -44,7 +45,12 @@ public class Play extends AppCompatActivity {
 
         etapa = 0;
 
-
+        geniusDAO = new GeniusDAO(Play.this);
+        try {
+            geniusDAO.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
 
@@ -77,13 +83,18 @@ public class Play extends AppCompatActivity {
         btIniciar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                int teste;
                 if(!INICIO){
                     INICIO = true;
+                    sequencia = geniusDAO.getData();
+                    for (int tupla : sequencia) {
+                        teste = tupla;
+                    }
+                    
                 }else{
                     AlertDialog alertDialog = new AlertDialog.Builder(Play.this).create();
                     alertDialog.setTitle("Alerta!");
-                    alertDialog.setMessage("Preencher o nome!");
+                    alertDialog.setMessage("O jogo já iniciou!");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {

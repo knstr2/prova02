@@ -3,11 +3,10 @@ package com.example.alunoanalise.myapplication;
 /**
  * Created by alunoanalise on 15/06/2016.
  */
-import android.content.ContentValues;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,9 +19,14 @@ public class GeniusDAO {
     private SQLiteDatabase database;
     private DatabaseHelper dbHelper;
     private String[] colunas_tabela = {DatabaseHelper.COL_ID,
-            DatabaseHelper.COL_NOME
-//            DatabaseHelper.COL_EMAIL,
-//            DatabaseHelper.COL_TELEFONE
+            DatabaseHelper.COL_SEQ_1,
+            DatabaseHelper.COL_SEQ_2,
+            DatabaseHelper.COL_SEQ_3,
+            DatabaseHelper.COL_SEQ_4,
+            DatabaseHelper.COL_SEQ_5,
+            DatabaseHelper.COL_SEQ_6,
+            DatabaseHelper.COL_SEQ_7,
+            DatabaseHelper.COL_SEQ_8
     };
 
     public GeniusDAO(Context context) {
@@ -38,104 +42,68 @@ public class GeniusDAO {
     }
 
     private Genius cursorToGenius(Cursor cursor) {
-        Genius pessoa = new Genius();
-        pessoa.setId(cursor.getLong(0));
-        pessoa.setNome(cursor.getString(1));
-        pessoa.setEmail(cursor.getString(2));
-        pessoa.setTelefone(cursor.getString(3));
+        Genius genius = new Genius();
+        genius.setId(cursor.getLong(0));
+        genius.setSeq_1(cursor.getInt(1));
+        genius.setSeq_2(cursor.getInt(2));
+        genius.setSeq_3(cursor.getInt(3));
+        genius.setSeq_4(cursor.getInt(4));
+        genius.setSeq_5(cursor.getInt(5));
+        genius.setSeq_6(cursor.getInt(6));
+        genius.setSeq_7(cursor.getInt(7));
+        genius.setSeq_8(cursor.getInt(8));
 
+        return genius;
 
-        return pessoa;
-
-    }
-
-    public Genius criaGenius(String nome, String email, String telefone) {
-        ContentValues valores = new ContentValues();
-        valores.put(DatabaseHelper.COL_NOME, nome);
-//        valores.put(DatabaseHelper.COL_EMAIL, email);
-//        valores.put(DatabaseHelper.COL_TELEFONE, telefone);
-
-        long insertId = database.insert(DatabaseHelper.TABELA_GENIUS, null, valores);
-
-        Cursor cursor = database.query(DatabaseHelper.TABELA_GENIUS,
-                colunas_tabela,
-                DatabaseHelper.COL_ID + " = " + insertId,
-                null, null, null, null);
-
-        cursor.moveToFirst();
-        Genius novoGenius = cursorToGenius(cursor);
-        cursor.close();
-
-        return novoGenius;
-    }
-
-    public void deletarGenius(Genius pessoa) {
-        database.delete(DatabaseHelper.TABELA_GENIUS,
-                DatabaseHelper.COL_NOME + " = '" + pessoa.getNome() + "' AND "
-//                        DatabaseHelper.COL_EMAIL + " = '" + pessoa.getEmail() + "' AND " +
-//                        DatabaseHelper.COL_TELEFONE + " = '" + pessoa.getTelefone() + "'"
-                , null);
-    }
-
-    public void deletarNomeGenius(Genius pessoa) {
-        database.delete(DatabaseHelper.TABELA_GENIUS,
-                DatabaseHelper.COL_NOME + " = '" + pessoa.getNome() + "'", null);
-    }
-
-    public void atualizarGenius(Genius pessoa) {
-        ContentValues cv = new ContentValues();
-        cv.put(DatabaseHelper.COL_NOME,pessoa.getNome());
-        database.update(DatabaseHelper.TABELA_GENIUS,cv,DatabaseHelper.COL_ID + " = " + pessoa.getId(),null);
     }
 
     public List<Genius> getAllGenius() {
-        List<Genius> pessoas = new ArrayList<>();
+        List<Genius> geniuss = new ArrayList<>();
         Cursor cursor = database.query(DatabaseHelper.TABELA_GENIUS, colunas_tabela, null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Genius pessoa = cursorToGenius(cursor);
-            pessoas.add(pessoa);
+            Genius genius = cursorToGenius(cursor);
+            geniuss.add(genius);
             cursor.moveToNext();
 
         }
         cursor.close();
-        return pessoas;
+        return geniuss;
 
     }
 
-    public String getData() {
+    public int getData()[] {
 
         Cursor cursor = database.query(DatabaseHelper.TABELA_GENIUS, colunas_tabela, null, null, null, null, null);
 
-        String resultado = "";
+        int[] resultado = new int[cursor.getCount()];
 
         int iid = cursor.getColumnIndex(DatabaseHelper.COL_ID);
-        int iinome = cursor.getColumnIndex(DatabaseHelper.COL_NOME);
-
-        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-
-            resultado = resultado + cursor.getString(iid) + " " + cursor.getString(iinome)  + "\n";
-
-        }
-
-        return resultado;
-    }
-
-    public String[] getDataNome() {
-
-        Cursor cursor = database.query(DatabaseHelper.TABELA_GENIUS, colunas_tabela, null, null, null, null, null);
-
-        String[] resultado = new String[cursor.getCount()];
-
-        int iinome = cursor.getColumnIndex(DatabaseHelper.COL_NOME);
+        int iiseq_1 = cursor.getColumnIndex(DatabaseHelper.COL_SEQ_1);
+        int iiseq_2 = cursor.getColumnIndex(DatabaseHelper.COL_SEQ_2);
+        int iiseq_3 = cursor.getColumnIndex(DatabaseHelper.COL_SEQ_3);
+        int iiseq_4 = cursor.getColumnIndex(DatabaseHelper.COL_SEQ_4);
+        int iiseq_5 = cursor.getColumnIndex(DatabaseHelper.COL_SEQ_5);
+        int iiseq_6 = cursor.getColumnIndex(DatabaseHelper.COL_SEQ_6);
+        int iiseq_7 = cursor.getColumnIndex(DatabaseHelper.COL_SEQ_7);
+        int iiseq_8 = cursor.getColumnIndex(DatabaseHelper.COL_SEQ_8);
 
         int i = 0;
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 
-            resultado[i] = cursor.getString(iinome);
+            resultado[i] = cursor.getInt(iid);
+            resultado[i] = cursor.getInt(iiseq_1);
+            resultado[i] = cursor.getInt(iiseq_2);
+            resultado[i] = cursor.getInt(iiseq_3);
+            resultado[i] = cursor.getInt(iiseq_4);
+            resultado[i] = cursor.getInt(iiseq_5);
+            resultado[i] = cursor.getInt(iiseq_6);
+            resultado[i] = cursor.getInt(iiseq_7);
+            resultado[i] = cursor.getInt(iiseq_8);
 
             i++;
+
         }
 
         return resultado;

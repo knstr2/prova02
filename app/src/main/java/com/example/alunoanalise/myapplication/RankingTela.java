@@ -5,26 +5,22 @@ package com.example.alunoanalise.myapplication;
  */
 
 import android.content.Intent;
-import java.sql.SQLException;
-
-import android.service.notification.NotificationListenerService;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class RankingTela extends AppCompatActivity {
 
+    String[] VetorLista;
     private ListView lvRanking;
     private RankingDAO rankingDAO;
     private List lista;
-    String[] VetorLista;
-
     private Ranking ranking = new Ranking();
 //    public List<Ranking> listaString = new ArrayList<Ranking>();
 

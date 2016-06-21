@@ -8,9 +8,9 @@
         android:layout_gravity="start"
         app:showAsAction="never" /-->
     <item android:id="@+id/mvoltar"
-        android:title="Voltar"
         android:icon="@android:drawable/ic_menu_revert"
         android:orderInCategory="100"
+        android:title="Voltar"
         app:showAsAction="always" />
 
 </menu>

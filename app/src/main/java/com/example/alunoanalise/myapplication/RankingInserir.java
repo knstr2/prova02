@@ -4,14 +4,11 @@ package com.example.alunoanalise.myapplication;
  * Created by alunoanalise on 15/06/2016.
  */
 
-import android.support.v7.app.AppCompatActivity;
-
-
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,12 +23,11 @@ import java.util.Random;
 
 public class RankingInserir extends AppCompatActivity {
 
+    int delay = 0;
     private Button btConfirma;
     private TextView tvPontos;
     private EditText etInserirRanking;
     private RankingDAO rankingDAO;
-    int delay = 0;
-
     private Ranking ranking = new Ranking();
 //    public List<Ranking> listaString = new ArrayList<Ranking>();
 

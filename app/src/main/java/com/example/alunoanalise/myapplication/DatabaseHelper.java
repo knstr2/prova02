@@ -11,6 +11,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     static final String DBNAME = "DBGenius";
     static final String TABELA_GENIUS = "TabGenius";
+    static final String COL_FASE = "fase";
     static final String COL_SEQ_1 = "seq_1";
     static final String COL_SEQ_2 = "seq_2";
     static final String COL_SEQ_3 = "seq_3";
@@ -31,10 +32,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        String SQLDeleteGenius = "DROP TABLE IF EXISTS " + TABELA_GENIUS;
+        db.execSQL(SQLDeleteGenius);
 
-        String SQL = "CREATE TABLE "+
+        String SQLCreateGenius = "CREATE TABLE " +
                 TABELA_GENIUS + " ("+
                 COL_ID + " INTEGER PRIMARY KEY, " +
+                COL_FASE + " INTEGER, " +
                 COL_SEQ_1 + " INTEGER, " +
                 COL_SEQ_2 + " INTEGER, " +
                 COL_SEQ_3 + " INTEGER, " +
@@ -43,10 +47,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_SEQ_6 + " INTEGER, " +
                 COL_SEQ_7 + " INTEGER, " +
                 COL_SEQ_8 + " INTEGER);";
-        db.execSQL(SQL);
+        db.execSQL(SQLCreateGenius);
 
-        String SQLInsert = " INSERT INTO " +
+        String SQLInsert = "INSERT INTO " +
                 TABELA_GENIUS + " ("+
+                COL_FASE + ", " +
                 COL_SEQ_1 + ", " +
                 COL_SEQ_2 + ", " +
                 COL_SEQ_3 + ", " +
@@ -55,26 +60,67 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_SEQ_6 + ", " +
                 COL_SEQ_7 + ", " +
                 COL_SEQ_8 + ")" +
-                "VALUES (1,2,3,4,1,2,3,4);";
-        SQLInsert += " INSERT INTO " +
-                TABELA_GENIUS + " ("+
-                COL_SEQ_1 + ", " +
-                COL_SEQ_2 + ", " +
-                COL_SEQ_3 + ", " +
-                COL_SEQ_4 + ", " +
-                COL_SEQ_5 + ", " +
-                COL_SEQ_6 + ", " +
-                COL_SEQ_7 + ", " +
-                COL_SEQ_8 + ")" +
-                "VALUES (1,2,3,4,1,2,3,4);";
+                "VALUES (1,1,2,3,4,1,2,3,4);";
         db.execSQL(SQLInsert);
+        String SQLInsert2 = "INSERT INTO " +
+                TABELA_GENIUS + " ("+
+                COL_FASE + ", " +
+                COL_SEQ_1 + ", " +
+                COL_SEQ_2 + ", " +
+                COL_SEQ_3 + ", " +
+                COL_SEQ_4 + ", " +
+                COL_SEQ_5 + ", " +
+                COL_SEQ_6 + ", " +
+                COL_SEQ_7 + ", " +
+                COL_SEQ_8 + ")" +
+                "VALUES (2,1,3,1,3,1,3,1,3);";
+        db.execSQL(SQLInsert2);
+        String SQLInsert3 = "INSERT INTO " +
+                TABELA_GENIUS + " (" +
+                COL_FASE + ", " +
+                COL_SEQ_1 + ", " +
+                COL_SEQ_2 + ", " +
+                COL_SEQ_3 + ", " +
+                COL_SEQ_4 + ", " +
+                COL_SEQ_5 + ", " +
+                COL_SEQ_6 + ", " +
+                COL_SEQ_7 + ", " +
+                COL_SEQ_8 + ")" +
+                "VALUES (3,4,1,1,2,3,3,3,1);";
+        db.execSQL(SQLInsert3);
+        String SQLInsert4 = "INSERT INTO " +
+                TABELA_GENIUS + " (" +
+                COL_FASE + ", " +
+                COL_SEQ_1 + ", " +
+                COL_SEQ_2 + ", " +
+                COL_SEQ_3 + ", " +
+                COL_SEQ_4 + ", " +
+                COL_SEQ_5 + ", " +
+                COL_SEQ_6 + ", " +
+                COL_SEQ_7 + ", " +
+                COL_SEQ_8 + ")" +
+                "VALUES (4,1,2,3,4,1,2,3,4);";
+        db.execSQL(SQLInsert4);
+        String SQLInsert5 = "INSERT INTO " +
+                TABELA_GENIUS + " (" +
+                COL_FASE + ", " +
+                COL_SEQ_1 + ", " +
+                COL_SEQ_2 + ", " +
+                COL_SEQ_3 + ", " +
+                COL_SEQ_4 + ", " +
+                COL_SEQ_5 + ", " +
+                COL_SEQ_6 + ", " +
+                COL_SEQ_7 + ", " +
+                COL_SEQ_8 + ")" +
+                "VALUES (5,4,3,2,1,1,2,3,4);";
+        db.execSQL(SQLInsert5);
 
-        String SQL2 = "CREATE TABLE "+
+        String SQLCreateRanking = "CREATE TABLE " +
                 TABELA_RANKING + " ("+
                 COL_ID + " INTEGER PRIMARY KEY, " +
                 COL_NOME + " TEXT, "+
                 COL_PONTOS + " INTEGER);";
-        db.execSQL(SQL2);
+        db.execSQL(SQLCreateRanking);
     }
 
     @Override

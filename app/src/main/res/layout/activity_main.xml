@@ -1,56 +1,57 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Prova 02"
-        android:id="@+id/tvTitulo"
         android:layout_above="@+id/btJogar"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:text="Prova 02"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="50dp" />
 
     <Button
+        android:id="@+id/btJogar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jogar"
-        android:id="@+id/btJogar"
         android:layout_above="@+id/btSobre"
         android:layout_alignLeft="@+id/btSobre"
         android:layout_alignStart="@+id/btSobre"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="50dp"
+        android:text="Jogar" />
 
     <Button
+        android:id="@+id/btSobre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sobre"
-        android:id="@+id/btSobre"
         android:layout_above="@+id/btRank"
         android:layout_alignLeft="@+id/btRank"
         android:layout_alignStart="@+id/btRank"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="50dp"
+        android:text="Sobre" />
 
     <Button
+        android:id="@+id/btRank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rank"
-        android:id="@+id/btRank"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="50dp"
+        android:text="Rank" />
 
     <Button
+        android:id="@+id/btRankingInserir"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btRankingInserir"
-        android:background="@null"
         android:layout_alignTop="@+id/tvTitulo"
-         />
+        android:background="@null" />
 </RelativeLayout>

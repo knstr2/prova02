@@ -3,22 +3,22 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/tvIgorTadashiInoue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Aluno: Igor Tadashi Inoue"
-        android:id="@+id/tvIgorTadashiInoue"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="100dp"
+        android:text="Aluno: Igor Tadashi Inoue"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
+        android:id="@+id/tv1033585"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="RU: 1033585"
-        android:id="@+id/tv1033585"
-        android:layout_below="@+id/tvIgorTadashiInoue"
         android:layout_alignLeft="@+id/tvIgorTadashiInoue"
-        android:layout_alignStart="@+id/tvIgorTadashiInoue" />
+        android:layout_alignStart="@+id/tvIgorTadashiInoue"
+        android:layout_below="@+id/tvIgorTadashiInoue"
+        android:text="RU: 1033585"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 </RelativeLayout>

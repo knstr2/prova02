@@ -9,13 +9,13 @@
         android:layout_gravity="start"
         app:showAsAction="never" /-->
     <item android:id="@+id/mranking"
-        android:title="Ranking"
         android:orderInCategory="100"
+        android:title="Ranking"
         app:showAsAction="always" />
 
     <item android:id="@+id/maluno"
-        android:title="Aluno"
         android:orderInCategory="100"
+        android:title="Aluno"
         app:showAsAction="always" />
 
 
