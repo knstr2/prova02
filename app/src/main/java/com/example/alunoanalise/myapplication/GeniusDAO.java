@@ -19,6 +19,7 @@ public class GeniusDAO {
     private SQLiteDatabase database;
     private DatabaseHelper dbHelper;
     private String[] colunas_tabela = {DatabaseHelper.COL_ID,
+            DatabaseHelper.COL_FASE,
             DatabaseHelper.COL_SEQ_1,
             DatabaseHelper.COL_SEQ_2,
             DatabaseHelper.COL_SEQ_3,
@@ -44,14 +45,15 @@ public class GeniusDAO {
     private Genius cursorToGenius(Cursor cursor) {
         Genius genius = new Genius();
         genius.setId(cursor.getLong(0));
-        genius.setSeq_1(cursor.getInt(1));
-        genius.setSeq_2(cursor.getInt(2));
-        genius.setSeq_3(cursor.getInt(3));
-        genius.setSeq_4(cursor.getInt(4));
-        genius.setSeq_5(cursor.getInt(5));
-        genius.setSeq_6(cursor.getInt(6));
-        genius.setSeq_7(cursor.getInt(7));
-        genius.setSeq_8(cursor.getInt(8));
+        genius.setFase(cursor.getInt(1));
+        genius.setSeq_1(cursor.getInt(2));
+        genius.setSeq_2(cursor.getInt(3));
+        genius.setSeq_3(cursor.getInt(4));
+        genius.setSeq_4(cursor.getInt(5));
+        genius.setSeq_5(cursor.getInt(6));
+        genius.setSeq_6(cursor.getInt(7));
+        genius.setSeq_7(cursor.getInt(8));
+        genius.setSeq_8(cursor.getInt(9));
 
         return genius;
 
@@ -80,6 +82,7 @@ public class GeniusDAO {
         int[] resultado = new int[cursor.getCount()];
 
         int iid = cursor.getColumnIndex(DatabaseHelper.COL_ID);
+        int iifase = cursor.getColumnIndex(DatabaseHelper.COL_FASE);
         int iiseq_1 = cursor.getColumnIndex(DatabaseHelper.COL_SEQ_1);
         int iiseq_2 = cursor.getColumnIndex(DatabaseHelper.COL_SEQ_2);
         int iiseq_3 = cursor.getColumnIndex(DatabaseHelper.COL_SEQ_3);
@@ -93,6 +96,7 @@ public class GeniusDAO {
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 
             resultado[i] = cursor.getInt(iid);
+            resultado[i] = cursor.getInt(iifase);
             resultado[i] = cursor.getInt(iiseq_1);
             resultado[i] = cursor.getInt(iiseq_2);
             resultado[i] = cursor.getInt(iiseq_3);

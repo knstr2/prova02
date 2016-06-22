@@ -9,6 +9,7 @@ import java.util.List;
 public class Genius {
 
     private long id;
+    private int fase;
     private int seq_1;
     private int seq_2;
     private int seq_3;
@@ -19,8 +20,9 @@ public class Genius {
     private int seq_8;
     private List lista = new ArrayList();
 
-    public Genius(long id, int seq_1, int seq_2, int seq_3, int seq_4, int seq_5, int seq_6, int seq_7, int seq_8) {
+    public Genius(long id, int fase, int seq_1, int seq_2, int seq_3, int seq_4, int seq_5, int seq_6, int seq_7, int seq_8) {
         this.id = id;
+        this.fase = fase;
         this.seq_1 = seq_1;
         this.seq_2 = seq_2;
         this.seq_3 = seq_3;
@@ -32,6 +34,7 @@ public class Genius {
     }
     public Genius() {
         this.id = 0;
+        this.fase = 0;
         this.seq_1 = 0;
         this.seq_2 = 0;
         this.seq_3 = 0;
@@ -42,9 +45,26 @@ public class Genius {
         this.seq_8 = 0;
 
     }
+
+    public int getFase() {
+        return fase;
+    }
+
+    public void setFase(int fase) {
+        this.fase = fase;
+    }
+
+    public List getLista() {
+        return lista;
+    }
+
+    public void setLista(List lista) {
+        this.lista = lista;
+    }
+
     public List<Integer> ListaGenius(List lista){
 
-        this.lista.add(getId() + ", " + getSeq_1() + ", " + getSeq_2() + ", " + getSeq_3() + ", " + getSeq_4() + ", " + getSeq_5() + ", " + getSeq_6() + ", " + getSeq_7() + ", " + getSeq_8());
+        this.lista.add(getId() + ", " + getFase() + ", " + getSeq_1() + ", " + getSeq_2() + ", " + getSeq_3() + ", " + getSeq_4() + ", " + getSeq_5() + ", " + getSeq_6() + ", " + getSeq_7() + ", " + getSeq_8());
 
         return lista;
 
