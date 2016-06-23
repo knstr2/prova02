@@ -50,7 +50,7 @@ public class Play extends AppCompatActivity {
     static boolean INICIO = false;
     int[] sequencia;
     Timer timer = new Timer();
-    ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+    ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 30);
 
     private GeniusDAO geniusDAO;
     private Button btVerde, btVermelho, btAmarelo, btAzul, btIniciar;
@@ -202,7 +202,7 @@ public class Play extends AppCompatActivity {
 
     void drawScreen() {
         vtFase.setText("FASE: " + fase);
-        vtFase.setText("VIDAS: " + vidas);
+        vtVidas.setText("VIDAS: " + vidas);
     }
 
     private void startPhase() {
@@ -237,18 +237,6 @@ public class Play extends AppCompatActivity {
      * Start next phase or win
      */
     private void startNextPhase() {
-
-        // Let the user know
-        AlertDialog alertDialog = new AlertDialog.Builder(Play.this).create();
-        alertDialog.setTitle("Que bom!");
-        alertDialog.setMessage("Voce ganhu a fase " + fase + "!");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
 
         // Phases are over? You win
         fase++;
@@ -336,7 +324,19 @@ public class Play extends AppCompatActivity {
         }
 
         if (sequenciaAtual.size() == 8) {
-            startNextPhase();
+
+            // Let the user know
+            AlertDialog alertDialog = new AlertDialog.Builder(Play.this).create();
+            alertDialog.setTitle("Que bom!");
+            alertDialog.setMessage("Voce ganhu a fase " + fase + "!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            startNextPhase();
+                        }
+                    });
+            alertDialog.show();
         }
 
     }
