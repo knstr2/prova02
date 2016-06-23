@@ -3,6 +3,7 @@ package com.example.alunoanalise.myapplication;
 /**
  * Created by alunoanalise on 15/06/2016.
  */
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -68,7 +69,8 @@ public class RankingDAO {
 
     public List<Ranking> getAllRanking() {
         List<Ranking> rankings = new ArrayList<>();
-        Cursor cursor = database.query(DatabaseHelper.TABELA_RANKING, colunas_tabela, null, null, null, null, null);
+        Cursor cursor = database.query(DatabaseHelper.TABELA_RANKING,
+                colunas_tabela, null, null, null, null, DatabaseHelper.COL_PONTOS + " DESC");
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

@@ -21,4 +21,23 @@
         android:layout_below="@+id/tvIgorTadashiInoue"
         android:text="RU: 1033585"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tvLeandroJavierSepp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv1033585"
+        android:layout_alignStart="@+id/tv1033585"
+        android:layout_below="@+id/tv1033585"
+        android:text="Aluno: Leandro Javier Sepp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tv1020889"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv1033585"
+        android:layout_below="@+id/tvLeandroJavierSepp"
+        android:text="RU: 1020889"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 </RelativeLayout>

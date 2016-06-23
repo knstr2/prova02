@@ -1,53 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btVerde"
+    <TextView
+        android:id="@+id/activity_play_tv_fase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="114dp"
-        android:background="#00ff00" />
+        android:text="FASE"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/btVermelho"
+    <TextView
+        android:id="@+id/activity_play_tv_vidas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btVerde"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="#ff0000" />
+        android:text="VIDAS"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/btAmarelo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/btVerde"
-        android:layout_marginTop="132dp"
-        android:background="#fffb00" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btAzul"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btAmarelo"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="#0000ff" />
+        <Button
+            android:id="@+id/btVerde"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btIniciar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/btIniciar"
+            android:layout_toStartOf="@+id/btIniciar"
+            android:background="#00ff00" />
 
-    <Button
-        android:id="@+id/btIniciar"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Iniciar" />
-</RelativeLayout>
+        <Button
+            android:id="@+id/btVermelho"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/btVerde"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/btIniciar"
+            android:layout_toRightOf="@+id/btIniciar"
+            android:background="#ff0000" />
+
+        <Button
+            android:id="@+id/btAmarelo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/btIniciar"
+            android:layout_toLeftOf="@+id/btIniciar"
+            android:layout_toStartOf="@+id/btIniciar"
+            android:background="#fffb00" />
+
+        <Button
+            android:id="@+id/btAzul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/btIniciar"
+            android:layout_toEndOf="@+id/btIniciar"
+            android:layout_toRightOf="@+id/btIniciar"
+            android:background="#0000ff" />
+
+        <Button
+            android:id="@+id/btIniciar"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:minHeight="80dp"
+            android:minWidth="120dp"
+            android:text="Iniciar" />
+
+
+    </RelativeLayout>
+</LinearLayout>
