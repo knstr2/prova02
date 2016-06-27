@@ -50,7 +50,7 @@ public class Play extends AppCompatActivity {
     static boolean INICIO = false;
     int[] sequencia;
     Timer timer = new Timer();
-    ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 30);
+    ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
 
     private GeniusDAO geniusDAO;
     private Button btVerde, btVermelho, btAmarelo, btAzul, btIniciar;
@@ -310,10 +310,22 @@ public class Play extends AppCompatActivity {
             vidas--;
             drawScreen();
             if (vidas == 0) {
-                Toast.makeText(getBaseContext(), "Sequencia errada. 0 vidas. Voltar a fase inicial",
-                        Toast.LENGTH_SHORT).show();
-                restartPhases();
-                startPhase();
+                AlertDialog alertDialog = new AlertDialog.Builder(Play.this).create();
+                alertDialog.setTitle("Fim de jogo");
+                alertDialog.setMessage("Você não tem mais vidas!");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+//                                startNextPhase();
+                                Intent intent = new Intent(Play.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                alertDialog.show();
+
+//                restartPhases();
+//                startPhase();
                 return;
             } else {
                 Toast.makeText(getBaseContext(), "Sequencia errada. Ainda tem " + vidas + " vidas",
@@ -423,25 +435,25 @@ public class Play extends AppCompatActivity {
 
             switch (buttonindex) {
                 case VERDE:
-                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 50);
+                    toneG.startTone(ToneGenerator.TONE_CDMA_ABBR_ALERT, 100);
                     btVerde.startAnimation(animation);
 //                    btVerde.setVisibility(View.INVISIBLE);
                     //                  btVerde.setVisibility(View.VISIBLE);
                     break;
                 case VERMELHO:
-                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 50);
+                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 100);
                     btVermelho.startAnimation(animation);
 //                    btVermelho.setVisibility(View.INVISIBLE);
                     //                  btVermelho.setVisibility(View.VISIBLE);
                     break;
                 case AMARELHO:
-                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 50);
+                    toneG.startTone(ToneGenerator.TONE_CDMA_CALL_SIGNAL_ISDN_INTERGROUP, 100);
                     btAmarelo.startAnimation(animation);
 //                    btAmarelo.setVisibility(View.INVISIBLE);
                     //                  btAmarelo.setVisibility(View.VISIBLE);
                     break;
                 case AZUL:
-                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 50);
+                    toneG.startTone(ToneGenerator.TONE_CDMA_HIGH_L, 100);
                     btAzul.startAnimation(animation);
 //                    btAzul.setVisibility(View.INVISIBLE);
                     //                  btAzul.setVisibility(View.VISIBLE);
