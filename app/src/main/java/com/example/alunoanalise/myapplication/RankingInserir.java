@@ -41,7 +41,9 @@ public class RankingInserir extends AppCompatActivity {
 //        final int pontos = Integer.valueOf(tvPontos.getText().toString());
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
-        final int pontos = getRandomNumber();
+//        final int pontos = getRandomNumber();
+        Bundle b = getIntent().getExtras();
+        final int pontos = b.getInt("pontos");
         tvPontos.setText(Integer.toString(pontos));
 
         rankingDAO = new RankingDAO(RankingInserir.this);
@@ -79,8 +81,19 @@ public class RankingInserir extends AppCompatActivity {
                             rankingDAO.criaRanking(nome, pontos);
                         }
                     }).start();
-                    Toast.makeText(RankingInserir.this, "Registro inserido!",
-                            Toast.LENGTH_SHORT).show();
+                    android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(RankingInserir.this).create();
+                    alertDialog.setTitle("Reistro inserido");
+                    alertDialog.setMessage("Inserido no Ranking com Sucesso!");
+                    alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    Intent intent;
+                                    intent = new Intent(RankingInserir.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                    alertDialog.show();
                 }
             }
         });

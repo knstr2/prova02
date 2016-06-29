@@ -42,7 +42,7 @@ public class RankingTela extends AppCompatActivity {
 
         for (int i = 0; i < lista.size(); i++) {
             Ranking ranking = (Ranking) lista.get(i);
-            VetorLista[i] = ranking.getId() + ": " + ranking.getNome()+ ": " + ranking.getPontos();
+            VetorLista[i] = i+1 + ": " + ranking.getNome()+ ": " + ranking.getPontos();
         }
 
 

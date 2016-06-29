@@ -42,13 +42,8 @@ public class Play extends AppCompatActivity {
     static private final int VERMELHO = 2;
     static private final int AMARELHO = 3;
     static private final int AZUL = 4;
-    static private final int MAX_VIDAS = 4;
-    static boolean BOTAO_VERDE = false;
-    static boolean BOTAO_VERMELHO = false;
-    static boolean BOTAO_AMARELO = false;
-    static boolean BOTAO_AZUL = false;
     static boolean INICIO = false;
-    int[] sequencia;
+
     Timer timer = new Timer();
     ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
 
@@ -60,15 +55,14 @@ public class Play extends AppCompatActivity {
     private Genius geniusAtual;
     private List<Integer> sequenciaAtual = new LinkedList<>();
     private int vidas;
+    private int score;
     private boolean busyBlinking;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
-
-
+//    private GoogleApiClient client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +75,8 @@ public class Play extends AppCompatActivity {
         btIniciar = (Button) findViewById(R.id.btIniciar);
         vtFase = (TextView) findViewById(R.id.activity_play_tv_fase);
         vtVidas = (TextView) findViewById(R.id.activity_play_tv_vidas);
+
+        score = 1000;
 
         geniusDAO = new GeniusDAO(Play.this);
         try {
@@ -95,49 +91,109 @@ public class Play extends AppCompatActivity {
         btVerde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addSequence(VERDE);
+                if (INICIO) {
+                    addSequence(VERDE);
+                } else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(Play.this).create();
+                    alertDialog.setTitle("Inicie o jogo!");
+                    alertDialog.setMessage("O jogo ainda não foi iniciado");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
             }
         });
         btVermelho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addSequence(VERMELHO);
+                if (INICIO) {
+                    addSequence(VERMELHO);
+                } else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(Play.this).create();
+                    alertDialog.setTitle("Inicie o jogo!");
+                    alertDialog.setMessage("O jogo ainda não foi iniciado");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
             }
         });
         btAmarelo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addSequence(AMARELHO);
+                if (INICIO) {
+                    addSequence(AMARELHO);
+                } else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(Play.this).create();
+                    alertDialog.setTitle("Inicie o jogo!");
+                    alertDialog.setMessage("O jogo ainda não foi iniciado");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
             }
         });
         btAzul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addSequence(AZUL);
+                if (INICIO) {
+                    addSequence(AZUL);
+                } else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(Play.this).create();
+                    alertDialog.setTitle("Inicie o jogo!");
+                    alertDialog.setMessage("O jogo ainda não foi iniciado");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
             }
         });
         btIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startPhase();
+                if (INICIO) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(Play.this).create();
+                    alertDialog.setTitle("O jogo já iniciou!");
+                    alertDialog.setMessage("O jogo já iniciou");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                } else {
+                    INICIO = true;
+                    startPhase();
+                }
             }
         });
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
-
-    public int gerarAleatorio() {
-        Random rand = new Random();
-        int n = rand.nextInt(3);
-        return n;
+//        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_voltar, menu);
         return true;
     }
 
@@ -147,6 +203,15 @@ public class Play extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        Intent intent;
+
+        switch(id) {
+            case R.id.mvoltar:
+                intent = new Intent(Play.this, MainActivity.class);
+                startActivity(intent);
+
+                break;
+        }
 
         //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {
@@ -162,7 +227,7 @@ public class Play extends AppCompatActivity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
+//        client.connect();
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
                 "Play Page", // TODO: Define a title for the content shown.
@@ -173,7 +238,7 @@ public class Play extends AppCompatActivity {
                 // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse("android-app://com.example.alunoanalise.myapplication/http/host/path")
         );
-        AppIndex.AppIndexApi.start(client, viewAction);
+//        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
@@ -192,8 +257,8 @@ public class Play extends AppCompatActivity {
                 // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse("android-app://com.example.alunoanalise.myapplication/http/host/path")
         );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+//        AppIndex.AppIndexApi.end(client, viewAction);
+//        client.disconnect();
     }
 
     private void blinkButton(int i) {
@@ -231,6 +296,15 @@ public class Play extends AppCompatActivity {
     private void restartPhases() {
         fase = 1;
         vidas = 3;
+        INICIO = false;
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+              score--;
+            }
+        },1000);
+
     }
 
     /**
@@ -242,6 +316,9 @@ public class Play extends AppCompatActivity {
         fase++;
         if (geniusDAO.getAllGenius().size() < fase) {
             Intent intent = new Intent(Play.this, RankingInserir.class);
+            Bundle b = new Bundle();
+            b.putInt("pontos", score);
+            intent.putExtras(b);
             startActivity(intent);
 
             // Start with this phase
@@ -295,62 +372,73 @@ public class Play extends AppCompatActivity {
     }
 
     private void addSequence(int buttonindex) {
+        if (vidas <= 0) {
+            restartPhases();
 
-        // Do nothing while sequence is being shown
-        if (busyBlinking) {
-            return;
-        }
-
-        // Beep&blink
-        blinkButton(buttonindex);
-
-        if (buttonindex == getNextSequence()) {
-            sequenciaAtual.add(buttonindex);
         } else {
-            vidas--;
-            drawScreen();
-            if (vidas == 0) {
+            // Do nothing while sequence is being shown
+            if (busyBlinking) {
+                return;
+            }
+
+            // Beep&blink
+            blinkButton(buttonindex);
+
+            if (buttonindex == getNextSequence()) {
+                sequenciaAtual.add(buttonindex);
+            } else {
+                vidas--;
+                score = score - 100;
+                drawScreen();
+                if (vidas == 0) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(Play.this).create();
+                    alertDialog.setTitle("Fim de jogo");
+                    alertDialog.setMessage("Você não tem mais vidas!");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    Intent intent = new Intent(Play.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                    alertDialog.show();
+
+//                restartPhases();
+//                startPhase();
+                    return;
+                } else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(Play.this).create();
+                    alertDialog.setTitle("Sequência errada!");
+                    alertDialog.setMessage("Você ainda tem " + vidas + " vidas!");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    startPhase();
+                                }
+                            });
+                    alertDialog.show();
+                    return;
+                }
+            }
+
+            if (sequenciaAtual.size() == 8) {
+
+                // Let the user know
                 AlertDialog alertDialog = new AlertDialog.Builder(Play.this).create();
-                alertDialog.setTitle("Fim de jogo");
-                alertDialog.setMessage("Você não tem mais vidas!");
+                alertDialog.setTitle("Que bom!");
+                alertDialog.setMessage("Voce ganhu a fase " + fase + "!");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
-//                                startNextPhase();
-                                Intent intent = new Intent(Play.this, MainActivity.class);
-                                startActivity(intent);
+                                startNextPhase();
                             }
                         });
                 alertDialog.show();
-
-//                restartPhases();
-//                startPhase();
-                return;
-            } else {
-                Toast.makeText(getBaseContext(), "Sequencia errada. Ainda tem " + vidas + " vidas",
-                        Toast.LENGTH_SHORT).show();
-                startPhase();
-                return;
             }
         }
-
-        if (sequenciaAtual.size() == 8) {
-
-            // Let the user know
-            AlertDialog alertDialog = new AlertDialog.Builder(Play.this).create();
-            alertDialog.setTitle("Que bom!");
-            alertDialog.setMessage("Voce ganhu a fase " + fase + "!");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            startNextPhase();
-                        }
-                    });
-            alertDialog.show();
-        }
-
     }
 
     /**
