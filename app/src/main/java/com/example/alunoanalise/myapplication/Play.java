@@ -19,16 +19,12 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,7 +45,7 @@ public class Play extends AppCompatActivity {
 
     private GeniusDAO geniusDAO;
     private Button btVerde, btVermelho, btAmarelo, btAzul, btIniciar;
-    private TextView vtFase, vtVidas;
+    private TextView vtFase, vtVidas, vtPontos;
     private int fase = 1;
     private List<Genius> geniuses;
     private Genius geniusAtual;
@@ -75,8 +71,7 @@ public class Play extends AppCompatActivity {
         btIniciar = (Button) findViewById(R.id.btIniciar);
         vtFase = (TextView) findViewById(R.id.activity_play_tv_fase);
         vtVidas = (TextView) findViewById(R.id.activity_play_tv_vidas);
-
-        score = 1000;
+        vtPontos = (TextView) findViewById(R.id.activity_play_tv_score);
 
         geniusDAO = new GeniusDAO(Play.this);
         try {
@@ -180,6 +175,26 @@ public class Play extends AppCompatActivity {
                     alertDialog.show();
                 } else {
                     INICIO = true;
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            if (!INICIO) {
+                                cancel();
+                            }
+
+                            if (!busyBlinking) {
+                                score--;
+                            }
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    drawScreen();
+                                }
+                            });
+
+                        }
+                    }, 1000, 1000);
                     startPhase();
                 }
             }
@@ -268,6 +283,7 @@ public class Play extends AppCompatActivity {
     void drawScreen() {
         vtFase.setText("FASE: " + fase);
         vtVidas.setText("VIDAS: " + vidas);
+        vtPontos.setText("PONTOS: " + score);
     }
 
     private void startPhase() {
@@ -297,14 +313,7 @@ public class Play extends AppCompatActivity {
         fase = 1;
         vidas = 3;
         INICIO = false;
-
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-              score--;
-            }
-        },1000);
-
+        score = 1000;
     }
 
     /**
@@ -319,6 +328,7 @@ public class Play extends AppCompatActivity {
             Bundle b = new Bundle();
             b.putInt("pontos", score);
             intent.putExtras(b);
+            restartPhases();
             startActivity(intent);
 
             // Start with this phase
